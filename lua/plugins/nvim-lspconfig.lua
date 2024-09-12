@@ -64,7 +64,7 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
-              diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { "missing-fields" } },
             },
           },
         },
