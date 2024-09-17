@@ -1,8 +1,9 @@
+---@type LazySpec[]
 return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason-lspconfig.nvim" },
+      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     opts = {
@@ -11,10 +12,28 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              completion = {
-                callSnippet = "Replace",
+              runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
               },
-              diagnostics = { disable = { "missing-fields" } },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+              },
+              workspace = {
+                checkThirdParty = false,
+                -- library = {
+                --   vim.env.VIMRUNTIME
+                --   -- Depending on the usage, you might want to add additional paths here.
+                --   -- "${3rd}/luv/library"
+                --   -- "${3rd}/busted/library",
+                -- },
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                library = vim.api.nvim_get_runtime_file("", true),
+              },
+              format = { enable = false },
+              telemetry = { enable = false },
             },
           },
         },
@@ -100,7 +119,7 @@ return {
 
   {
     "williamboman/mason.nvim",
-    cmd = "Mason",
+    cmd = { "Mason" },
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     opts = {
@@ -151,7 +170,7 @@ return {
 
   {
     "j-hui/fidget.nvim",
-    event = "LspAttach",
+    event = { "LspAttach" },
     opts = {},
   },
 }
