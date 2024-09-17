@@ -19,6 +19,10 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
     },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local _ = opts
+    end,
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -31,7 +35,6 @@ return {
           end,
         },
         completion = { completeopt = "menu,menuone,noinsert" },
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
