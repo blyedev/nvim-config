@@ -1,4 +1,4 @@
----@type LazySpec[]
+---@type LazySpec
 return {
   {
     "nvim-telescope/telescope.nvim",

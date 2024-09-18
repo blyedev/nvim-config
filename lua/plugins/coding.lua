@@ -1,6 +1,6 @@
----@type LazySpec[]
+---@type LazySpec
 return {
-  {
+  {-- Provide default configurations to LSP's
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
@@ -43,20 +43,34 @@ return {
         eslint = {},
         cssls = {},
       },
-      setup = {},
       on_attach = function(client, bufnr)
+        local wk = require("which-key")
+
         local map = function(keys, func, desc, mode)
           mode = mode or "n"
-          vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+          wk.add({
+            {
+              keys,
+              func,
+              desc = "LSP: " .. desc,
+              mode = mode,
+              buffer = bufnr,
+            },
+          })
         end
 
-        map("gd", require("telescope.builtin").lsp_definitions, "[G]o to [D]efinition")
-        map("gr", require("telescope.builtin").lsp_references, "[G]o to [R]eferences")
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]o to [I]mplementation")
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-        map("gD", vim.lsp.buf.declaration, "[G]o to [D]eclaration")
+        -- Keymaps
+        map("gd",         require("telescope.builtin").lsp_definitions,               "[G]oto [D]efinition")
+        map("gr",         require("telescope.builtin").lsp_references,                "[G]oto [R]eferences")
+        map("gI",         require("telescope.builtin").lsp_implementations,           "[G]oto [I]mplementation")
+        map("<leader>D",  require("telescope.builtin").lsp_type_definitions,          "Type [D]efinition")
+        map("<leader>ds", require("telescope.builtin").lsp_document_symbols,          "[D]ocument [S]ymbols")
+        map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+        map("<leader>rn", vim.lsp.buf.rename,                                         "[R]e[n]ame")
+        map("<leader>ca", vim.lsp.buf.code_action,                                    "[C]ode [A]ction", { "n", "x" })
+        map("gD",         vim.lsp.buf.declaration,                                    "[G]oto [D]eclaration")
 
+        -- Highligh keyword
         if client.supports_method("textDocument/documentHighlight") then
           local highlight_group = vim.api.nvim_create_augroup("LSPDocumentHighlight", { clear = true })
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -101,23 +115,12 @@ return {
           on_attach = opts.on_attach,
         }, server_opts)
 
-        if opts.setup[server_name] then
-          if opts.setup[server_name](server_name, server_options) then
-            goto continue
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server_name, server_options) then
-            goto continue
-          end
-        end
-
         lspconfig[server_name].setup(server_options)
-        ::continue::
       end
     end,
   },
 
-  {
+  { -- Tool (lsp, formatter, linter, debugger) installing
     "williamboman/mason.nvim",
     cmd = { "Mason" },
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -146,7 +149,7 @@ return {
     end,
   },
 
-  {
+  { -- Formatter
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
@@ -168,7 +171,7 @@ return {
     },
   },
 
-  {
+  { -- Pretty notifications for processes
     "j-hui/fidget.nvim",
     event = { "LspAttach" },
     opts = {},

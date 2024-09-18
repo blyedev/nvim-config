@@ -1,4 +1,4 @@
----@type LazySpec[]
+---@type LazySpec
 return {
 
   {
@@ -23,6 +23,8 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+      "onsails/lspkind.nvim",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -31,6 +33,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
       luasnip.config.setup({})
 
       cmp.setup({
@@ -43,9 +46,7 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-y>"] = cmp.mapping.confirm(),
           ["<C-Space>"] = cmp.mapping.complete({}),
 
           ["<C-l>"] = cmp.mapping(function()
@@ -63,6 +64,28 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+          { name = "buffer" },
+        },
+        formatting = {
+          fields = { "abbr", "kind", "menu" },
+          expandable_indicator = true,
+          format = lspkind.cmp_format({
+            menu = {
+              nvim_lsp = "[LSP]",
+              luasnip = "[snip]",
+              path = "[path]",
+              buffer = "[buf]",
+            },
+            mode = "symbol", -- show only symbol annotations
+            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            -- can also be a function to dynamically calculate max width such as
+            -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+            ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+            show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+            -- The function below will be called before any actual modifications from lspkind
+            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          }),
         },
       })
     end,
