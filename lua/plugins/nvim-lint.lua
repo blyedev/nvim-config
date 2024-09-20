@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "mfussenegger/nvim-lint",
-  event = "LazyFile",
+  event = "VeryLazy",
   opts = {
     -- Event to trigger linters
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
