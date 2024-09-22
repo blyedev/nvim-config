@@ -64,7 +64,7 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
-          { name = "buffer" },
+          -- { name = "buffer" },
         },
         formatting = {
           fields = { "abbr", "kind", "menu" },
@@ -74,7 +74,7 @@ return {
               nvim_lsp = "[LSP]",
               luasnip = "[snip]",
               path = "[path]",
-              buffer = "[buf]",
+              -- buffer = "[buf]",
             },
             mode = "symbol", -- show only symbol annotations
             maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
