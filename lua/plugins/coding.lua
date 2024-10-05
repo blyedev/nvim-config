@@ -39,6 +39,10 @@ return {
         },
         pyright = {},
         ruff = {},
+        ts_ls = {
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        },
+        volar = {},
         -- angularls = {},
         eslint = {},
         cssls = {},
@@ -110,10 +114,24 @@ return {
 
       local lspconfig = require("lspconfig")
       for server_name, server_opts in pairs(opts.servers) do
+        local additional_opts = {}
+        if server_name == "ts_ls" then
+          additional_opts.init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = require("mason-registry").get_package("vue-language-server"):get_install_path()
+                  .. "/node_modules/@vue/language-server",
+                languages = { "vue" },
+              },
+            },
+          }
+        end
+
         local server_options = vim.tbl_deep_extend("force", {
           capabilities = capabilities,
           on_attach = opts.on_attach,
-        }, server_opts)
+        }, server_opts, additional_opts)
 
         lspconfig[server_name].setup(server_options)
       end
