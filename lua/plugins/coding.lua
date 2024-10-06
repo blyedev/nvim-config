@@ -46,6 +46,7 @@ return {
         -- angularls = {},
         eslint = {},
         cssls = {},
+        marksman = {},
       },
       on_attach = function(client, bufnr)
         local wk = require("which-key")
@@ -146,6 +147,7 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
+        "markdownlint",
       },
     },
     config = function(_, opts)
@@ -185,6 +187,7 @@ return {
       notify_on_error = false,
       formatters_by_ft = {
         lua = { "stylua" },
+        markdown = { "markdownlint" },
       },
     },
   },
