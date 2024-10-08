@@ -148,6 +148,7 @@ return {
       ensure_installed = {
         "stylua",
         "markdownlint",
+        "prettier",
       },
     },
     config = function(_, opts)
@@ -188,6 +189,9 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         markdown = { "markdownlint" },
+        vue = { "prettier" },
+        ts = { "prettier" },
+        css = { "prettier" },
       },
     },
   },
