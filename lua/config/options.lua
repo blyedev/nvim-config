@@ -10,6 +10,10 @@ vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
 end)
 
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.showbreak = '↪ '
+
 vim.opt.breakindent = false
 vim.opt.undofile = true
 vim.opt.ignorecase = true
