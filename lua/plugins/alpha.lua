@@ -7,7 +7,7 @@ return {
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
-    dashboard.section.header.val = require("plugins.ascii.matrix").wake_up_multiline
+    dashboard.section.header.val = require("plugins.ascii.creation_of_adam").hands
 
     dashboard.section.buttons.val = {
       dashboard.button("f", "  Find file", "<cmd>Telescope find_files<cr>"),
