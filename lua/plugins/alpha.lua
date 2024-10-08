@@ -18,6 +18,8 @@ return {
       dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
     }
 
+    dashboard.opts.layout[1].val = 8
+
     local handle = io.popen("fortune")
     local fortune = handle:read("*a")
     handle:close()
