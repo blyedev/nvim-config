@@ -8,6 +8,7 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
     dashboard.section.header.val = require("plugins.ascii.creation_of_adam").hands
+    -- dashboard.section.header.val = require("plugins.ascii.kingdom_of_heaven").king_hand
 
     dashboard.section.buttons.val = {
       dashboard.button("f", "  Find file", "<cmd>Telescope find_files<cr>"),
