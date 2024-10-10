@@ -8,6 +8,7 @@ return {
       { "<leader>r", group = "[R]ename" },
       { "<leader>s", group = "[S]earch" },
       { "<leader>w", group = "[W]orkspace" },
+      { "<leader>m", group = "[M]eta", { "<leader>ml", "<cmd>Lazy<CR>", desc = "Open [L]azy" } },
       -- { "<leader>t", group = "[T]oggle" },
       {
         "<leader>?",
