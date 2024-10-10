@@ -142,7 +142,7 @@ return {
   { -- Tool (lsp, formatter, linter, debugger) installing
     "williamboman/mason.nvim",
     cmd = { "Mason" },
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {

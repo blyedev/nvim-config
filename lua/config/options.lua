@@ -12,7 +12,7 @@ end)
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.showbreak = '↪ '
+vim.opt.showbreak = "↪ "
 
 vim.opt.breakindent = false
 vim.opt.undofile = true
