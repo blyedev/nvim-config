@@ -4,16 +4,7 @@ return {
     "L3MON4D3/LuaSnip",
     lazy = true,
     build = "make install_jsregexp",
-    dependencies = {
-      {
-        "blyedev/friendly-snippets",
-        config = function()
-          -- require("luasnip").filetype_extend("html", {"angular"})
-          -- require("luasnip").filetype_extend("typescript", {"angular"})
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-    },
+    dependencies = {},
   },
 
   {

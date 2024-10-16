@@ -8,7 +8,7 @@ return {
     local button = require("alpha.themes.dashboard").button
     return {
       layout = {
-        { type = "padding", val = 6 },
+        { type = "padding", val = 4 },
         {
           type = "text",
           val = require("plugins.ascii.creation_of_adam").hands_no_bg,

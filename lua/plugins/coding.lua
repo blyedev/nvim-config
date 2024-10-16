@@ -192,6 +192,7 @@ return {
         vue = { "prettier" },
         ts = { "prettier" },
         css = { "prettier" },
+        xml = { "prettier" },
       },
     },
   },
