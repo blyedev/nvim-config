@@ -7,6 +7,10 @@ return {
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
       fish = { "fish" },
+      vue = { "stylelint" },
+      css = { "stylelint" },
+      html = { "stylelint" },
+      typescript = { "stylelint" },
       markdown = { "markdownlint" },
       -- Use the "*" filetype to run linters on all filetypes.
       -- ['*'] = { 'global linter' },

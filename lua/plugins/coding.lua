@@ -150,6 +150,7 @@ return {
         "markdownlint",
         "prettier",
         "xmlformatter",
+        "stylelint",
       },
     },
     config = function(_, opts)
@@ -190,9 +191,10 @@ return {
       notify_no_formatters = true,
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "markdownlint" },
+        markdown = { "prettier", "markdownlint" },
         vue = { "prettier" },
-        ts = { "prettier" },
+        typescript = { "prettier" },
+        javascript = { "prettier" },
         css = { "prettier" },
         xml = { "xmlformat" },
         svg = { "xmlformat" },
