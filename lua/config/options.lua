@@ -30,3 +30,12 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.hlsearch = true
+
+vim.diagnostic.config({
+  virtual_text = {
+    source = true,
+  },
+  float = {
+    source = true,
+  },
+})

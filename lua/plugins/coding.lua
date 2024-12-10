@@ -37,7 +37,15 @@ return {
             },
           },
         },
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "off",  -- Disable type checking in favour of ruff and mypy
+              },
+            },
+          },
+        },
         ruff = {},
         ts_ls = {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
@@ -147,10 +155,11 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        "markdownlint",
+        "mypy",
         "prettier",
-        "xmlformatter",
         "stylelint",
+        "markdownlint",
+        "xmlformatter",
       },
     },
     config = function(_, opts)
@@ -191,7 +200,9 @@ return {
       notify_no_formatters = true,
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { "prettier", "markdownlint" },
+        python = { "ruff_format" },
+        toml = { "prettier" },
+        markdown = { "markdownlint", "prettier" },
         vue = { "prettier" },
         typescript = { "prettier" },
         javascript = { "prettier" },

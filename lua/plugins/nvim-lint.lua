@@ -1,22 +1,14 @@
 ---@type LazySpec
 return {
   "mfussenegger/nvim-lint",
-  event = "VeryLazy",
   opts = {
     -- Event to trigger linters
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
-      fish = { "fish" },
-      vue = { "stylelint" },
+      python = { "mypy" },
+      -- vue = { "stylelint" },
       css = { "stylelint" },
-      html = { "stylelint" },
-      typescript = { "stylelint" },
-      markdown = { "markdownlint" },
-      -- Use the "*" filetype to run linters on all filetypes.
-      -- ['*'] = { 'global linter' },
-      -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
-      -- ['_'] = { 'fallback linter' },
-      -- ["*"] = { "typos" },
+      -- markdown = { "markdownlint" },
     },
     ---@type table<string,table>
     linters = {
