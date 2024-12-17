@@ -51,7 +51,7 @@ return {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         },
         volar = {},
-        -- angularls = {},
+        angularls = {},
         eslint = {},
         cssls = {},
         marksman = {},
