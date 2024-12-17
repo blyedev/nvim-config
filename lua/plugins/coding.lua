@@ -207,6 +207,7 @@ return {
         typescript = { "prettier" },
         javascript = { "prettier" },
         css = { "prettier" },
+        scss = { "prettier" },
         xml = { "xmlformat" },
         svg = { "xmlformat" },
       },
