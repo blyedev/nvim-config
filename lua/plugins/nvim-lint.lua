@@ -8,6 +8,7 @@ return {
       python = { "mypy" },
       -- vue = { "stylelint" },
       css = { "stylelint" },
+      scss = { "stylelint" },
       -- markdown = { "markdownlint" },
     },
     ---@type table<string,table>
