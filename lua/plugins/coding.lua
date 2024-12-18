@@ -4,10 +4,9 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     opts = {
-      capabilities = {},
       servers = {
         lua_ls = {
           settings = {
@@ -41,7 +40,7 @@ return {
           settings = {
             python = {
               analysis = {
-                typeCheckingMode = "off",  -- Disable type checking in favour of ruff and mypy
+                typeCheckingMode = "off", -- Disable type checking in favour of ruff and mypy
               },
             },
           },
@@ -109,14 +108,6 @@ return {
       end,
     },
     config = function(_, opts)
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities(),
-        opts.capabilities or {}
-      )
-
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(opts.servers),
       })
@@ -138,7 +129,7 @@ return {
         end
 
         local server_options = vim.tbl_deep_extend("force", {
-          capabilities = capabilities,
+          capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities),
           on_attach = opts.on_attach,
         }, server_opts, additional_opts)
 

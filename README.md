@@ -28,7 +28,7 @@ This config has been known to show errors on first startup so before assuming an
 - Dashboard via [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - Installation of editor tooling via [mason](https://github.com/williamboman/mason.nvim)
 - LSP configuration via [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- Completion via [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- Completion via [blink.cmp](https://github.com/Saghen/blink.cmp)
 - Formatting support via [conform](https://github.com/stevearc/conform.nvim)
 - Search via [telescope](https://github.com/nvim-telescope/telescope.nvim)
 - Git changes highlighting via [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
