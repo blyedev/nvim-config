@@ -37,7 +37,7 @@ This config has been known to show errors on first startup so before assuming an
 
 ## UI Demo
 
-![Screenshot of Dashboard](./ui/dashboard.png)
+![Screenshot of Dashboard](./ui/dashboard-fixed-colors.png)
 
 Besides this little piece of ASCII art, everything else is just a plain [tokyonight](https://github.com/folke/tokyonight.nvim) theme...
 
