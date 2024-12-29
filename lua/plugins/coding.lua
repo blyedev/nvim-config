@@ -193,15 +193,22 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "ruff_format" },
-        toml = { "prettier" },
-        markdown = { "markdownlint", "prettier" },
-        vue = { "prettier" },
+
+        -- Web dev
         typescript = { "prettier" },
         javascript = { "prettier" },
+        vue = { "prettier" },
+        html = { "prettier" },
         css = { "prettier" },
         scss = { "prettier" },
+
+        -- Markup
+        markdown = { "markdownlint", "prettier" },
+        json = { "prettier" },
+        yaml = { "prettier" },
         xml = { "xmlformat" },
         svg = { "xmlformat" },
+        ["_"] = { "prettier" },
       },
     },
   },
