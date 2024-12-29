@@ -143,6 +143,7 @@ return {
     cmd = { "Mason" },
     keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Open Mason" } },
     build = ":MasonUpdate",
+    opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
         "stylua",
