@@ -17,6 +17,7 @@ Because I use lazy and mason, installation of plugins and subsequently LSPs is p
 - **git** - for `lazy.nvim` to install dependencies
 - **python**
 - **node**
+- **cargo**
 - **[Nerd Font](https://www.nerdfonts.com/)** of choice - This allows neovim to display various icons. I chose Droid Sans Mono
 - **ripgrep** - fast grep utility
 - **fd** - file searching utility
