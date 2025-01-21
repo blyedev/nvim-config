@@ -47,6 +47,7 @@ return {
         },
         ruff = {},
         taplo = {},
+        rust_analyzer = {},
         ts_ls = {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         },
