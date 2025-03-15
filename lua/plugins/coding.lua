@@ -55,6 +55,7 @@ return {
         angularls = {},
         eslint = {},
         cssls = {},
+        ansiblels = {},
         marksman = {},
       },
       on_attach = function(client, bufnr)
@@ -154,6 +155,7 @@ return {
         "stylelint",
         "markdownlint",
         "xmlformatter",
+        "ansible-lint",
       },
     },
     config = function(_, opts)

@@ -10,6 +10,7 @@ return {
       css = { "stylelint" },
       scss = { "stylelint" },
       -- markdown = { "markdownlint" },
+      yaml = { "ansible_lint" },
     },
     ---@type table<string,table>
     linters = {
