@@ -113,7 +113,7 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(opts.servers),
+        automatic_installation = true,
       })
 
       local lspconfig = require("lspconfig")
@@ -192,6 +192,9 @@ return {
         desc = "[F]ormat buffer",
       },
     },
+
+    ---@module "conform"
+    ---@type conform.setupOpts
     opts = {
       notify_on_error = false,
       notify_no_formatters = true,

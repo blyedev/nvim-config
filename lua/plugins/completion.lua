@@ -4,7 +4,7 @@ return {
   {
     "saghen/blink.cmp",
     -- use a release tag to download pre-built binaries
-    version = "v0.*",
+    version = "1.*",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -15,9 +15,14 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        completion = {
-          enabled_providers = { "lsp", "path" },
-        },
+        default = { "lsp", "path" },
+      },
+
+      -- For whatever reason this is required to fix an obscure bug only present after the update,
+      -- see https://github.com/Saghen/blink.cmp/discussions/1414
+      -- git blame this comment to find breaking blink version in lockfile
+      fuzzy = {
+        implementation = "lua",
       },
 
       completion = {
@@ -30,7 +35,7 @@ return {
       },
 
       -- experimental signature help support
-      signature = { enabled = true }
+      signature = { enabled = true },
     },
   },
 }
