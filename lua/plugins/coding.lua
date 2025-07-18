@@ -158,6 +158,7 @@ return {
         "markdownlint",
         "xmlformatter",
         "ansible-lint",
+        "hclfmt",
       },
     },
     config = function(_, opts)
@@ -218,6 +219,7 @@ return {
         yaml = { "prettier" },
         xml = { "xmlformat" },
         svg = { "xmlformat" },
+        hcl = { "hcl" },
         ["_"] = { "prettier" },
       },
     },
