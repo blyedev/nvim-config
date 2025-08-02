@@ -50,14 +50,41 @@ return {
         gopls = {},
         bashls = {},
         rust_analyzer = {},
-        ts_ls = {
+        vue_ls = {},
+        vtsls = {
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@vue/typescript-plugin",
+                    location = vim.fn.stdpath("data")
+                      .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                  },
+                },
+              },
+            },
+          },
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         },
-        volar = {},
         angularls = {},
         eslint = {},
         cssls = {},
         ansiblels = {},
+        tofu_ls = {
+          filetypes = { "terraform", "terraform-vars" },
+          get_language_id = function(_, filetype)
+            if filetype == "terraform" then
+              return "opentofu"
+            end
+            if filetype == "terraform-vars" then
+              return "opentofu-vars"
+            end
+            return filetype
+          end,
+        },
         marksman = {},
       },
       on_attach = function(client, bufnr)
@@ -75,14 +102,15 @@ return {
             },
           })
         end
+        local fzf = require("fzf-lua")
 
-        -- Keymaps
-        map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-        map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-        map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+        map("gd", fzf.lsp_definitions, "[G]oto [D]efinition")
+        map("gr", fzf.lsp_references, "[G]oto [R]eferences")
+        map("gI", fzf.lsp_implementations, "[G]oto [I]mplementation")
+        map("<leader>D", fzf.lsp_typedefs, "Type [D]efinition")
+        map("<leader>ds", fzf.lsp_document_symbols, "[D]ocument [S]ymbols")
+        map("<leader>ws", fzf.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols (live)")
+
         map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -117,29 +145,20 @@ return {
         automatic_installation = true,
       })
 
-      local lspconfig = require("lspconfig")
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        on_attach = opts.on_attach,
+      })
+
       for server_name, server_opts in pairs(opts.servers) do
-        local additional_opts = {}
-        if server_name == "ts_ls" then
-          additional_opts.init_options = {
-            plugins = {
-              {
-                name = "@vue/typescript-plugin",
-                location = require("mason-registry").get_package("vue-language-server"):get_install_path()
-                  .. "/node_modules/@vue/language-server",
-                languages = { "vue" },
-              },
-            },
-          }
-        end
-
-        local server_options = vim.tbl_deep_extend("force", {
-          capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities),
-          on_attach = opts.on_attach,
-        }, server_opts, additional_opts)
-
-        lspconfig[server_name].setup(server_options)
+        vim.lsp.config(server_name, server_opts)
       end
+
+      local names = {}
+      for name in pairs(opts.servers) do
+        table.insert(names, name)
+      end
+      vim.lsp.enable(names)
     end,
   },
 

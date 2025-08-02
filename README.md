@@ -22,6 +22,7 @@ Because I use lazy and mason, installation of plugins and subsequently LSPs is p
 - **[Nerd Font](https://www.nerdfonts.com/)** of choice - This allows neovim to display various icons. I chose Droid Sans Mono
 - **ripgrep** - fast grep utility
 - **fd** - file searching utility
+- **fzf** - searching utility
 
 After obtaining the dependencies this repo is to be cloned into `~/.config/nvim/`
 
@@ -39,7 +40,7 @@ This config has been known to show errors on first startup so before assuming an
 - LSP configuration via [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - Completion via [blink.cmp](https://github.com/Saghen/blink.cmp)
 - Formatting support via [conform](https://github.com/stevearc/conform.nvim)
-- Search via [telescope](https://github.com/nvim-telescope/telescope.nvim)
+- Search via [fzf](https://github.com/ibhagwan/fzf-lua)
 - Git changes highlighting via [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 - Mappings visualized via [which-key](https://github.com/folke/which-key.nvim)
 - a few less mission-critical QOL plugins...
