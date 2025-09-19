@@ -173,6 +173,7 @@ return {
         "stylua",
         "mypy",
         "prettier",
+        "eslint_d",
         "stylelint",
         "markdownlint",
         "xmlformatter",
@@ -225,9 +226,9 @@ return {
         go = { "gofmt" },
 
         -- Web dev
-        typescript = { "prettier" },
-        javascript = { "prettier" },
-        vue = { "prettier" },
+        typescript = { "eslint_d" },
+        javascript = { "eslint_d" },
+        vue = { "eslint_d" },
         html = { "prettier" },
         css = { "prettier" },
         scss = { "prettier" },
