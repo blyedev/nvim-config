@@ -17,6 +17,7 @@ vim.pack.add({
   "https://github.com/folke/which-key.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/j-hui/fidget.nvim",
+  "https://github.com/mfussenegger/nvim-lint",
 })
 
 vim.cmd.colorscheme("tokyonight-night")
@@ -33,8 +34,22 @@ vim.diagnostic.config({
 
 require("mason").setup()
 
+local mr = require("mason-registry")
+local function ensure_installed()
+  local package = mr.get_package("tflint")
+  if not package:is_installed() then
+    package:install()
+  end
+end
+
+if mr.refresh then
+  mr.refresh(ensure_installed)
+else
+  ensure_installed()
+end
+
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "rust_analyzer" },
+  ensure_installed = { "lua_ls", "rust_analyzer", "terraformls" },
   automatic_enable = false,
 })
 
@@ -78,6 +93,36 @@ require("blink.cmp").setup({
 })
 
 require("fidget").setup({})
+
+local lint = require("lint")
+
+lint.linters_by_ft = {
+  tf = { "tflint" },
+  terraform = { "tflint" },
+  ["terraform-vars"] = { "tflint" },
+}
+
+local function debounce(ms, fn)
+  local timer = vim.uv.new_timer()
+
+  return function(...)
+    local argv = { ... }
+
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule(function()
+        fn(unpack(argv))
+      end)
+    end)
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+  group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
+  callback = debounce(100, function()
+    lint.try_lint()
+  end),
+})
 
 require("gitsigns").setup({
   signs = {
@@ -160,5 +205,11 @@ vim.lsp.config("rust_analyzer", {
   capabilities = lsp_capabilities,
 })
 
+vim.lsp.config("terraformls", {
+  capabilities = lsp_capabilities,
+  filetypes = { "tf", "terraform", "terraform-vars" },
+})
+
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("terraformls")
